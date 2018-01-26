@@ -22,8 +22,7 @@ public class InsuredmeApplication {
 
 	    @RequestMapping("/greeting")
 	    public User greeting(@RequestParam(value="name", defaultValue="World") String name) {
-	        return new User(counter.incrementAndGet(),
-	                            String.format(template, name));
+	        return new User();
 	    }
 
 	public static void main(String[] args) throws Exception {
