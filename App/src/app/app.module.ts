@@ -7,19 +7,28 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
+import { CarPage } from '../pages/car/car';
+
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    CarPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    CarPage
   ],
   providers: [
     StatusBar,
