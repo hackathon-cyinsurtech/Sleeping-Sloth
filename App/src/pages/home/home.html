@@ -1,17 +1,47 @@
-<ion-header  >
-  <ion-navbar class="navBar">
-      <ion-title>Home</ion-title>
+<ion-header>
+  <ion-navbar>
+      <ion-title>Insure Me</ion-title>
       <ion-buttons end>
 
-          <ion-icon name="md-contact">Log in</ion-icon>
+          Log in
 
       </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding style="margin:26px; ">
+  <div class="title">Transparency, Fairness, Trust</div>
+  <div style="margin:26px 0px 26px 0px; ">Some info blah blah blah for the company and what we do</div>
+  <div class="title" style="margin:26px 0px 25px 0px;">I want to insure my:</div>
+
+
+
+
+
+  <ion-grid>
+  <ion-row>
+    <ion-col text-center>
+      <button>
+        <ion-icon name="car" style="icons"></ion-icon>
+        <div class="insuranceType">Car</div>
+      </button>
+    </ion-col>
+    <ion-col text-center>
+      <button>
+        <ion-icon name="home"></ion-icon>
+        <div class="insuranceType">Home</div>
+      </button>
+    </ion-col>
+    <ion-col text-center>
+      <button>
+        <ion-icon name="medkit"></ion-icon>
+        <div class="insuranceType">Health</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<hr />
+
+
 </ion-content>
