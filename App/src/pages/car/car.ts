@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 /**
  * Generated class for the CarPage page.
  *
@@ -24,7 +26,19 @@ export class CarPage {
    private userInfo : FormGroup;
    public validation_messages:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera) {
+
+    let headers = new Headers ();
+    headers.append('Content-Type', 'application/json');
+
+    var body = "{'code':'HOUSE','description':'House'}";
+
+    this.http.get('http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com/user/all', {})
+        //.map(res => res.json())
+        .subscribe(data => {
+            console.log(data);
+        });
+
     this.validation_messages = {
     'email': [
     		{ type: 'required', message: 'Email is required.' },
@@ -64,15 +78,8 @@ export class CarPage {
     });
 
 
-    let headers = new Headers ();
-  headers.append('Content-Type', 'application/json');
 
-  /*this.http.get('http://10.11.74.3:8090/', JSON.stringify(body), {headers: headers})
-      //.map(res => res.json())
-      .subscribe(data => {
-          console.log(data);
-      });
-      */
+
 
   }
 
@@ -81,6 +88,11 @@ export class CarPage {
   }
 
   logForm(){
+    if(this.userInfo.valid){
+
+    }else{
+
+    }
   console.log(this.userInfo.value)
 }
 
