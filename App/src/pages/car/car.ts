@@ -31,6 +31,7 @@ export class CarPage {
    public photo:any;
    public questions:any;
    public choices:any;
+   public detailsSaved:boolean =false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform) {
 
@@ -181,7 +182,7 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
        // console.log(base64Image);
 
 
-          var body: any ="";
+          var body: any ='{"insuranceTypeCode": "CAR" ,';
 
 
           Object.keys(this.userInfo.controls).forEach(key => {
@@ -190,12 +191,13 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
             if(this.userInfo.get(key).value != ""){
               console.log(key);
                           console.log( this.userInfo.get(key).value);
-                body += '{"'+key+'": "'+this.userInfo.get(key).value+'" },';
+                body += '"'+key+'": "'+this.userInfo.get(key).value+'" ,';
             }
 
           });
 
           body = body.slice(0, -1);
+          body += "}";
           console.log(body);
 
       /*for(let temp of this.userInfo){
@@ -203,7 +205,7 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
           console.log(temp[0]+" "+temp[1]);
         }
       }*/
-
+      this.detailsSaved=true;
       this.http.post(this.apiURL+'/quote/add', body , {headers: headers})
       //.map(res => res.json())
       .subscribe(data => {

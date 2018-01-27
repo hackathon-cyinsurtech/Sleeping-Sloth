@@ -2,6 +2,16 @@ page-home {
 
 }
 
+
+ion-toast.success .toast-wrapper {
+  background: green;
+}
+
+ion-toast.error .toast-wrapper {
+  background: rgb(209, 71, 71);
+}
+
+
 .title{
   text-align:center; font-size:28px;
 }

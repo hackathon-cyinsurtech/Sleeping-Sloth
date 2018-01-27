@@ -14,6 +14,7 @@
 
 
 <ion-content padding>
+  <div [hidden]="detailsSaved">
   <div class="title" style="margin: 26px 0px 26px 0px;">Proposer Details</div>
 
 
@@ -36,7 +37,7 @@
             <ion-select formControlName="{{q.id}}">
                <ng-container *ngFor= "let choice of choices">
                       <ng-container *ngIf="q.id == choice.questionId ">
-                        <ion-option value="{{choice.id}}">{{choice.choice}}</ion-option>
+                        <ion-option value="{{choice.choice}}">{{choice.choice}}</ion-option>
                       </ng-container>
                </ng-container>
                </ion-select>
@@ -105,13 +106,14 @@
        <button ion-button full type="submit" [disabled]="!userInfo.valid" style="max-width:300px;">Submit</button>
      </div>
    </form>
+</div>
 
-
+  <div [hidden]="!detailsSaved">
      <div class="title" style="margin: 16px auto 16px auto;">To get a quote, upload your car's photos:</div>
      <button ion-button full style="max-width:300px; height:200px; margin: 16px auto 16px auto;" (click)="startPhotoProcess()">
         <ion-icon name="camera" style="padding-right:16px;"></ion-icon> Start Photo Processes
      </button>
-
+</div>
 
 
 

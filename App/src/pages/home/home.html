@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
       <ion-title>Insure Me</ion-title>
-      <ion-buttons end>
+      <ion-buttons end [hidden]="showLoginBtn">
 
-          Log in
+        <button (click)="login()" >Log in</button>
 
       </ion-buttons>
   </ion-navbar>
