@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import {Validators, FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms"
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Platform } from 'ionic-angular';
@@ -34,6 +34,8 @@ export class CarPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform) {
 
+
+
     if (this.platform.is('ios') || this.platform.is('android')) {
          // This will only print when on iOS
          this.apiURL = "http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com";
@@ -48,6 +50,10 @@ export class CarPage {
            .subscribe(data => {
                console.log(JSON.parse(data['_body']));
                this.questions = JSON.parse(data['_body']);
+
+
+
+
            });
 
    this.http.get(this.apiURL+'/question/allchoices', {})
@@ -57,6 +63,55 @@ export class CarPage {
                console.log(JSON.parse(data['_body']));
                this.choices = JSON.parse(data['_body']);
            });
+
+
+           //https://ionicthemes.com/tutorials/about/ionic2-form-handling-and-validation
+           this.userInfo = this.formBuilder.group({
+             email: ['', Validators.compose([
+             Validators.required,
+             Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+           ])],
+             password: ['', Validators.compose([
+            Validators.minLength(5),
+            Validators.required,
+            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+           ])],
+             name: ['', Validators.required],
+             surname: ['', Validators.required],
+             address: ['', Validators.required],
+             1: [''],
+             2: [''],
+             3: [''],
+             4: [''],
+             5: [''],
+             6: [''],
+             7: [''],
+             8: [''],
+             9: [''],
+             10: [''],
+             11: [''],
+             12: [''],
+             13: [''],
+             14: [''],
+             15: [''],
+             16: [''],
+             17: [''],
+             18: [''],
+             19: [''],
+             20: [''],
+             21: [''],
+             22: [''],
+             23: [''],
+             24: [''],
+             25: [''],
+             26: [''],
+             27: [''],
+             28: [''],
+           });
+
+
+
+
 
 /*
 //load photos
@@ -93,21 +148,18 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
 
 
       };
-//https://ionicthemes.com/tutorials/about/ionic2-form-handling-and-validation
-    this.userInfo = this.formBuilder.group({
-      email: ['', Validators.compose([
-			 Validators.required,
-			 Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-		 ])],
-      password: ['', Validators.compose([
-		 	Validators.minLength(5),
-		 	Validators.required,
-		 	Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-		])],
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      address: ['', Validators.required],
-    });
+
+
+
+
+
+  }
+
+  createFormRestrictions(){
+
+
+
+
 
 
 
@@ -122,7 +174,7 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
   logForm(){
     if(this.userInfo.valid){
 
-
+        console.log(this.userInfo);
 
     }else{
 

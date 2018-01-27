@@ -14,25 +14,40 @@
 
 
 <ion-content padding>
-  <div class="title" style="margin: 26px 0px 26px 0px;">Personal Information</div>
+  <div class="title" style="margin: 26px 0px 26px 0px;">Proposer Details</div>
 
 
   <form [formGroup]="userInfo" (ngSubmit)="logForm()">
 
     <ng-container *ngFor="let q of questions" >
-      {{q.question}}
-      <div *ngIf="q.type == 'FREETEXT' "><input type="text" /> </div>
-      <ng-container *ngIf="q.type != 'FREETEXT' ">
+      <div *ngIf="q.type == 'FREETEXT' ">
+      <ion-item class="inputText">
+        <ion-label color="primary" floating>{{q.question}}</ion-label>
+        <ion-input  type="text" formControlName="{{q.id}}"></ion-input>
 
-           <ul>
-             <ng-container *ngFor= "let choice of choices">
-                <ng-container *ngIf="q.id == choice.questionId "><li >{{choice.choice}}</li> </ng-container>
-             </ng-container>
-           </ul>
 
-      </ng-container>
+
+      </ion-item>
+      </div>
+
+      <div *ngIf="q.type != 'FREETEXT' ">
+        <ion-item class="inputText">
+          <ion-label color="primary">{{q.question}}</ion-label>
+            <ion-select formControlName="{{q.id}}">
+               <ng-container *ngFor= "let choice of choices">
+                      <ng-container *ngIf="q.id == choice.questionId ">
+                        <ion-option value="{{choice.id}}">{{choice.choice}}</ion-option>
+                      </ng-container>
+               </ng-container>
+               </ion-select>
+
+        </ion-item>
+      </div>
+
    </ng-container>
 
+
+<div class="title" style="margin: 26px 0px 26px 0px;">Personal Information</div>
      <ion-item class="inputText">
        <ion-label color="primary" floating>Email</ion-label>
        <ion-input type="email" formControlName="email"></ion-input>
