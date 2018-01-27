@@ -7,5 +7,7 @@ import com.sleepingsloth.insuredme.domain.Answer;
 
 public interface AnswerRepository extends CrudRepository<Answer, Long> {
 	
+	public Answer findTopByQuoteRequestIdAndQuestionId(@Param("quoteRequestId") long quoteRequestId, @Param("questionId") long questionId);
+
 	public Iterable<Answer> findByQuoteRequestId(@Param("quoteRequestId") long quoteRequestId);
 }

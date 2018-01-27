@@ -41,4 +41,11 @@ public class AnswerController {
 		LOGGER.info("Selecting all answers for quoteRequestId: " + quoteRequestId);
 		return answerRepository.findByQuoteRequestId(quoteRequestId);
 	}
+	
+	
+	@GetMapping(path="/findRegistrationNumberForQuote")
+	public @ResponseBody Answer getSpecificAnswerForQuote(@RequestParam long quoteRequestId) {
+		LOGGER.info("Selecting registration number for quoteRequestId: " + quoteRequestId);
+		return answerRepository.findTopByQuoteRequestIdAndQuestionId(quoteRequestId, 1);
+	}
 }

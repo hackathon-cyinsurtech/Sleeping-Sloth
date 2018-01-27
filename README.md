@@ -26,3 +26,10 @@ RESTful endpoints:
 - GET: /user/all
 - GET: /user/load?email=EMAIL&password=PASSWORD
 - GET: /user/loadUser?email	
+
+
+/quote/find?userId=1
+/quote/add
+/quote/all
+
+/answer/findRegistrationNumberForQuote?quoteRequestId=3

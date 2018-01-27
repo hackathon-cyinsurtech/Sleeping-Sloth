@@ -2,6 +2,7 @@ package com.sleepingsloth.insuredme.controller;
 
 import static java.lang.Long.valueOf;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ import com.sleepingsloth.insuredme.dao.AnswerRepository;
 import com.sleepingsloth.insuredme.dao.QuoteRequestRepository;
 import com.sleepingsloth.insuredme.dao.UserRepository;
 import com.sleepingsloth.insuredme.domain.Answer;
+import com.sleepingsloth.insuredme.domain.QuoteModel;
 import com.sleepingsloth.insuredme.domain.QuoteRequest;
 import com.sleepingsloth.insuredme.domain.User;
 import com.sleepingsloth.insuredme.domain.UserType;
@@ -82,7 +84,16 @@ public class QuoteRequestController {
 	}
 
 	@GetMapping(path = "/find")
-	public @ResponseBody Iterable<QuoteRequest> getAllQuotesForUser(@RequestParam long userId) {
-		return quoteRequestRepository.findByUserIdOrderById(userId);
+	public @ResponseBody Iterable<QuoteModel> getAllQuotesForUser(@RequestParam long userId) {
+		Iterable<QuoteRequest> requests = quoteRequestRepository.findByUserIdOrderById(userId);
+		 ArrayList<QuoteModel> models = new ArrayList<QuoteModel>();
+		for(QuoteRequest request : requests){
+			QuoteModel m = new QuoteModel();
+			m.setQuoteRequest(request);
+			m.setCarRegistrationNumber(answerRepository.findTopByQuoteRequestIdAndQuestionId(request.getId(), 1).getAnswer());
+			models.add(m);
+		}
+		
+		return models;
 	}
 }
