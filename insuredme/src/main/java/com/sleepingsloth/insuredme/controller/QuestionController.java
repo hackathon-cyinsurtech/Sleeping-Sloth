@@ -14,7 +14,6 @@ import com.sleepingsloth.insuredme.dao.QuestionChoiceRepository;
 import com.sleepingsloth.insuredme.dao.QuestionRepository;
 import com.sleepingsloth.insuredme.domain.Question;
 import com.sleepingsloth.insuredme.domain.QuestionChoice;
-import com.sleepingsloth.insuredme.domain.QuestionType;
 
 @Controller
 @RequestMapping(path="/question")
@@ -49,16 +48,16 @@ public class QuestionController {
 	}
 	
 	
-	@GetMapping(path="/type")
-	public @ResponseBody Iterable<Question> getAllQuestionForType(@RequestParam QuestionType questionType) {
-		LOGGER.info("Selecting questions for type: " + questionType);
-		return questionRepository.findByType(questionType);
+	@GetMapping(path="/find")
+	public @ResponseBody Iterable<Question> getAllQuestionForType(@RequestParam String insuranceTypeCode) {
+		LOGGER.info("Selecting questions for type: " + insuranceTypeCode);
+		return questionRepository.findByInsuranceTypeCodeOrderById(insuranceTypeCode);
 	}
 	
 	
 	@GetMapping(path="/choices")
 	public @ResponseBody Iterable<QuestionChoice> getAllChoicesForQuestion(@RequestParam long questionId) {
 		LOGGER.info("Selecting choices for question with id: " + questionId);
-		return questionChoiceRepository.findByQuestionId(questionId);
+		return questionChoiceRepository.findByQuestionIdOrderById(questionId);
 	}
 }

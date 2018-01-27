@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class QuoteRequest {
@@ -13,26 +12,24 @@ public class QuoteRequest {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@ManyToOne(targetEntity = InsuranceType.class)
-	private InsuranceType insuranceType;
+	private String insuranceTypeCode;
 
-	@ManyToOne(targetEntity = User.class)
-	private User user;
+	private long userId;
 
-	public InsuranceType getInsuranceType() {
-		return insuranceType;
+	public String getInsuranceTypeCode() {
+		return insuranceTypeCode;
 	}
 
-	public void setInsuranceType(InsuranceType insuranceType) {
-		this.insuranceType = insuranceType;
+	public void setInsuranceTypeCode(String insuranceTypeCode) {
+		this.insuranceTypeCode = insuranceTypeCode;
 	}
 
-	public User getUser() {
-		return user;
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public long getId() {
