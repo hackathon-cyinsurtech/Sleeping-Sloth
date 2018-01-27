@@ -19,6 +19,8 @@ export class HomePage {
   public apiURL: any;
   public showLoginBtn: any=false;
 
+  public pendingQuotes: any;
+
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public http: Http,  public platform: Platform, private toastCtrl: ToastController, private storage: Storage) {
     if (this.platform.is('ios') || this.platform.is('android')) {
          // This will only print when on iOS
@@ -49,7 +51,15 @@ ionViewWillEnter() {
             //.map(res => res.json())
        .subscribe(data => {
             console.log(data);
+            this.pendingQuotes = JSON.parse(data['_body']);
+            console.log(this.pendingQuotes);
        });
+
+       this.http.get(this.apiURL+'/quote/find?userId='+val, {})
+               //.map(res => res.json())
+          .subscribe(data => {
+               console.log(data);
+          });
   }
 
   insureMyCar(){
@@ -142,6 +152,10 @@ ionViewWillEnter() {
        ]
      });
      alert.present();
+  }
+
+  loadPendingQuote(id:any){
+    console.log(id);
   }
 
 }

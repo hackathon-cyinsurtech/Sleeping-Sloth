@@ -213,10 +213,10 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
     console.log('ionViewDidLoad CarPage');
     this.storage.get('userId').then((val) => {
         if(val == "" || val == null){
-           this.userId = val;
            this.isLoggedIn=false;
         }else{
 
+             this.userId = val;
           this.isLoggedIn=true;
         }
         console.log("is null? "+val + this.isLoggedIn);
@@ -224,16 +224,20 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
   }
 
   logForm(){
-    if(this.userInfo.valid){
+    if(this.userInfo.valid || this.isLoggedIn ){
 
         let headers = new Headers ();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'Bearer ');
 
        // console.log(base64Image);
+       var body: any ;
+        if(this.isLoggedIn){
+          body='{"userId":"'+this.userId+'" ,"insuranceTypeCode": "CAR" ,';
+        }else{
+          body ='{"insuranceTypeCode": "CAR" ,';
+        }
 
-
-          var body: any ='{"userId":"'+this.userId+'" ,"insuranceTypeCode": "CAR" ,';
 
 
           Object.keys(this.userInfo.controls).forEach(key => {
@@ -260,15 +264,15 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
       this.http.post(this.apiURL+'/quote/add', body , {headers: headers})
       //.map(res => res.json())
       .subscribe(data => {
-
+          console.log("Insurance data sent");
       });
 
 
     }else{
-
+      console.log("fucking else");
 
     }
-  console.log(this.userInfo.value)
+  //console.log(this.userInfo.value)
 }
 
 startPhotoProcess(){
