@@ -37,21 +37,25 @@ public class QuoteRequestController {
 
 	@PostMapping(path = "/add")
 	public @ResponseBody Long addNewQuote(@RequestBody Map<String, String> map) {
-		// Create user account (sneaky hehe)
-		User user = new User();
-		user.setEmail(map.get("email"));
-		user.setName(map.get("name"));
-		user.setAddress(map.get("address"));
-		user.setPassword(map.get("password"));
-		user.setSurname(map.get("surname"));
-		user.setUserType(UserType.INDIVIDUAL);
-		userRepository.save(user);
-		LOGGER.info("User " + user.getId() + " created for quote");
+		Long userId = Long.valueOf(map.get("userId"));
+		if(userId == null){
+			// If user not logged-in create user account (sneaky hehe)
+			User user = new User();
+			user.setEmail(map.get("email"));
+			user.setName(map.get("name"));
+			user.setAddress(map.get("address"));
+			user.setPassword(map.get("password"));
+			user.setSurname(map.get("surname"));
+			user.setUserType(UserType.INDIVIDUAL);
+			userRepository.save(user);
+			userId = user.getId();
+		}
+		LOGGER.info("User " + userId + " created for quote");
 
 		// Create quote request
 		QuoteRequest quoteRequest = new QuoteRequest();
 		quoteRequest.setInsuranceTypeCode(map.get("insuranceTypeCode"));
-		quoteRequest.setUserId(user.getId());
+		quoteRequest.setUserId(userId);
 		quoteRequestRepository.save(quoteRequest);
 		LOGGER.info("Quote " + quoteRequest.getId() + " created");
 
