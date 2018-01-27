@@ -6,6 +6,11 @@
         <button (click)="login()" >Log in</button>
 
       </ion-buttons>
+      <ion-buttons end [hidden]="!showLoginBtn">
+
+        <button (click)="logout()" >Logout</button>
+
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 

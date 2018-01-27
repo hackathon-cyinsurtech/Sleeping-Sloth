@@ -39,13 +39,7 @@ export class CarPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform, private storage: Storage) {
 
-    storage.get('userId').then((val) => {
-        if(val != null){
-           this.userId = val;
-           this.isLoggedIn=true;
-        }
-        console.log("is null? "+val);
-      });
+
 
     if (this.platform.is('ios') || this.platform.is('android')) {
          // This will only print when on iOS
@@ -215,8 +209,18 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
 
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad CarPage');
+    this.storage.get('userId').then((val) => {
+        if(val == "" || val == null){
+           this.userId = val;
+           this.isLoggedIn=false;
+        }else{
+
+          this.isLoggedIn=true;
+        }
+        console.log("is null? "+val + this.isLoggedIn);
+      });
   }
 
   logForm(){

@@ -26,10 +26,42 @@ export class HomePage {
        }else{
          this.apiURL = "/api";
        }
+
+
+
   }
+
+ionViewWillEnter() {
+  this.storage.get('userId').then((val) => {
+      if(val == "" || val == null){
+         this.showLoginBtn=false;
+      }else{
+        this.showLoginBtn=true;
+      }
+      console.log("is nullHome? "+val+ this.showLoginBtn);
+    });
+}
 
   insureMyCar(){
     this.navCtrl.push( CarPage );
+  }
+
+  logout(){
+     this.storage.set('userId', "");
+     this.showLoginBtn=true;
+
+     let toast = this.toastCtrl.create({
+     message: 'Logout Succsessful!',
+     duration: 4000,
+     position: 'top'
+    });
+
+    toast.onDidDismiss(() => {
+     console.log('Dismissed toast');
+    });
+
+    toast.present();
+
   }
 
   login(){
