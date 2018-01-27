@@ -30,14 +30,22 @@ export class CarPage {
 
     let headers = new Headers ();
     headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ');
 
-    var body = "{'code':'HOUSE','description':'House'}";
+    var body ='{"code": "HOUSESloth", "description":"HouseSlloth"}';
+console.log(body);
+console.log(JSON.stringify(body));
+this.http.post('/api', body, {headers: headers})
+//.map(res => res.json())
+.subscribe(data => {
 
-    this.http.get('http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com/user/all', {})
-        //.map(res => res.json())
-        .subscribe(data => {
-            console.log(data);
-        });
+});
+
+this.http.get('http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com/user/all', {})
+    //.map(res => res.json())
+    .subscribe(data => {
+        console.log(data);
+    });
 
     this.validation_messages = {
     'email': [
@@ -90,7 +98,10 @@ export class CarPage {
   logForm(){
     if(this.userInfo.valid){
 
+
+
     }else{
+
 
     }
   console.log(this.userInfo.value)
