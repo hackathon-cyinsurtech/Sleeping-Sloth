@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <div class="title">Personal Information</div>
+  <div class="title" style="margin: 26px 0px 26px 0px;">Personal Information</div>
 
 
   <form [formGroup]="userInfo" (ngSubmit)="logForm()">
@@ -70,6 +70,7 @@
        {{validation.message}}
      </div>
     </ng-container>
+    <div class="inputText" style="padding-bottom:26px; background: #FFF;" ></div>
 
      <div class="inputText" style="margin: 16px auto 16px auto; width:100%;">
        <button ion-button full type="submit" [disabled]="!userInfo.valid" style="max-width:300px;">Submit</button>
