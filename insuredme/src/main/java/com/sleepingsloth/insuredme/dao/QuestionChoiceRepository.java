@@ -7,5 +7,5 @@ import com.sleepingsloth.insuredme.domain.QuestionChoice;
 
 public interface QuestionChoiceRepository extends CrudRepository<QuestionChoice, Long> {
 	
-	public Iterable<QuestionChoice> findByQuestionId(@Param("questionId") long questionId);
+	public Iterable<QuestionChoice> findByQuestionIdOrderById(@Param("questionId") long questionId);
 }

@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sleepingsloth.insuredme.dao.AnswerRepository;
 import com.sleepingsloth.insuredme.domain.Answer;
-
-import javassist.bytecode.stackmap.TypeData.ClassName;
 
 @Controller
 @RequestMapping(path="/answer")
@@ -34,5 +33,12 @@ public class AnswerController {
 	public @ResponseBody Iterable<Answer> getAllAnswer() {
 		LOGGER.info("Selecting all answers");
 		return answerRepository.findAll();
+	}
+	
+	
+	@GetMapping(path="/find")
+	public @ResponseBody Iterable<Answer> getAllAnswerForQuote(@RequestParam long quoteRequestId) {
+		LOGGER.info("Selecting all answers for quoteRequestId: " + quoteRequestId);
+		return answerRepository.findByQuoteRequestId(quoteRequestId);
 	}
 }

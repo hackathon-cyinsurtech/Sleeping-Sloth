@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sleepingsloth.insuredme.dao.InsuranceTypeRepository;
 import com.sleepingsloth.insuredme.domain.InsuranceType;
 
-import javassist.bytecode.stackmap.TypeData.ClassName;
-
 @Controller
 @RequestMapping(path="/insurancetype")
 public class InsuranceTypeController {
