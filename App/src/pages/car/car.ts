@@ -174,7 +174,42 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
   logForm(){
     if(this.userInfo.valid){
 
-        console.log(this.userInfo);
+        let headers = new Headers ();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer ');
+
+       // console.log(base64Image);
+
+
+          var body: any ="";
+
+
+          Object.keys(this.userInfo.controls).forEach(key => {
+
+
+            if(this.userInfo.get(key).value != ""){
+              console.log(key);
+                          console.log( this.userInfo.get(key).value);
+                body += '{"'+key+'": "'+this.userInfo.get(key).value+'" },';
+            }
+
+          });
+
+          body = body.slice(0, -1);
+          console.log(body);
+
+      /*for(let temp of this.userInfo){
+        if(temp[1]!=""){
+          console.log(temp[0]+" "+temp[1]);
+        }
+      }*/
+
+      this.http.post(this.apiURL+'/quote/add', body , {headers: headers})
+      //.map(res => res.json())
+      .subscribe(data => {
+
+      });
+
 
     }else{
 
