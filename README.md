@@ -31,3 +31,5 @@ RESTful endpoints:
 /quote/find?userId=1
 /quote/add
 /quote/all
+
+/answer/findRegistrationNumberForQuote?quoteRequestId=3
