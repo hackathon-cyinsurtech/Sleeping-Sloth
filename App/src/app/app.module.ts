@@ -12,6 +12,7 @@ import { CarPage } from '../pages/car/car';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     MyApp,
