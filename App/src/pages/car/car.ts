@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Platform } from 'ionic-angular';
 
 /**
  * Generated class for the CarPage page.
@@ -25,27 +26,57 @@ export class CarPage {
   public userName: any;
    private userInfo : FormGroup;
    public validation_messages:any;
+   public apiURL: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera) {
+   public photo:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform) {
+
+    if (this.platform.is('ios') || this.platform.is('android')) {
+         // This will only print when on iOS
+         this.apiURL = "http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com";
+       }else{
+         this.apiURL = "/api";
+       }
 
     let headers = new Headers ();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ');
-
-    var body ='{"code": "HOUSESloth", "description":"HouseSlloth"}';
+/*
+    var body ='{"code": "Test200", "description":"Test200"}';
 console.log(body);
 console.log(JSON.stringify(body));
+
 this.http.post('/api', body, {headers: headers})
+//.map(res => res.json())
+.subscribe(data => {
+
+});*/
+
+var body: any ="";
+body = '{"quoteRequestId": "1235", "data" : "epiae tipote?" } ';
+//body.push({ data: base64Image });
+
+
+
+console.log(body);
+
+this.http.post(this.apiURL+'/photo/add', body, {headers: headers})
 //.map(res => res.json())
 .subscribe(data => {
 
 });
 
-this.http.get('http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com/user/all', {})
+this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
     //.map(res => res.json())
+
     .subscribe(data => {
         console.log(data);
+        var temp = JSON.parse(data['_body']);
+        console.log(temp[0]);
+        this.photo = temp[0]['data'];
     });
+
 
     this.validation_messages = {
     'email': [
@@ -109,7 +140,7 @@ this.http.get('http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.
 
 startPhotoProcess(){
   const options: CameraOptions = {
-    quality: 100,
+    quality: 20,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE
@@ -117,10 +148,40 @@ startPhotoProcess(){
 
   console.log("pinky and the brain");
   this.camera.getPicture(options).then((imageData) => {
-   // imageData is either a base64 encoded string or a file URI
+ // imageData is either a base64 encoded string or a file URI
    // If it's base64:
+   let headers = new Headers ();
+   headers.append('Content-Type', 'application/json');
+   headers.append('Authorization', 'Bearer ');
+
    let base64Image = 'data:image/jpeg;base64,' + imageData;
-   console.log(base64Image);
+  // console.log(base64Image);
+
+
+   var body: any ="";
+   body = '{"quoteRequestId": "1", "data" : "'+base64Image+'"}';
+ console.log(body);
+
+ this.http.post(this.apiURL+'/photo/add', body, {headers: headers})
+ //.map(res => res.json())
+ .subscribe(data => {
+
+ });
+
+   /*
+
+   var body: any = [];
+   body.push({quoteRequestId: 1});
+   //body.push({ data: base64Image });
+   body.push({ data: "sadasd" });
+
+
+   this.http.post('/photo', JSON.stringify(body), {headers: headers})
+   //.map(res => res.json())
+   .subscribe(data => {
+
+   });*/
+
   }, (err) => {
    // Handle error
   });

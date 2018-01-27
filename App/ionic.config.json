@@ -1,10 +1,12 @@
 {
   "name": "KPMGHackathon",
   "app_id": "",
-  "proxies": [{
-    "path": "/api",
-    "proxyUrl": "http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com/insurancetype/add"
-  }],
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com/"
+    }
+],
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
