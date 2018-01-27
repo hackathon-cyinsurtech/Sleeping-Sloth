@@ -9,6 +9,8 @@ import {Validators, FormArray, FormBuilder, FormControl, FormGroup} from "@angul
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Platform } from 'ionic-angular';
 
+import { Storage } from '@ionic/storage';
+
 /**
  * Generated class for the CarPage page.
  *
@@ -32,10 +34,18 @@ export class CarPage {
    public questions:any;
    public choices:any;
    public detailsSaved:boolean =false;
+   public isLoggedIn:boolean = false;
+   public userId:any = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform, private storage: Storage) {
 
-
+    storage.get('userId').then((val) => {
+        if(val != null){
+           this.userId = val;
+           this.isLoggedIn=true;
+        }
+        console.log("is null? "+val);
+      });
 
     if (this.platform.is('ios') || this.platform.is('android')) {
          // This will only print when on iOS
@@ -67,16 +77,8 @@ export class CarPage {
 
 
            //https://ionicthemes.com/tutorials/about/ionic2-form-handling-and-validation
+           if(this.isLoggedIn){
            this.userInfo = this.formBuilder.group({
-             email: ['', Validators.compose([
-             Validators.required,
-             Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-           ])],
-             password: ['', Validators.compose([
-            Validators.minLength(5),
-            Validators.required,
-            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-           ])],
              name: ['', Validators.required],
              surname: ['', Validators.required],
              address: ['', Validators.required],
@@ -109,6 +111,51 @@ export class CarPage {
              27: [''],
              28: [''],
            });
+          }else{
+            this.userInfo = this.formBuilder.group({
+              email: ['', Validators.compose([
+              Validators.required,
+              Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+            ])],
+              password: ['', Validators.compose([
+             Validators.minLength(5),
+             Validators.required,
+             Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+            ])],
+              name: ['', Validators.required],
+              surname: ['', Validators.required],
+              address: ['', Validators.required],
+              1: [''],
+              2: [''],
+              3: [''],
+              4: [''],
+              5: [''],
+              6: [''],
+              7: [''],
+              8: [''],
+              9: [''],
+              10: [''],
+              11: [''],
+              12: [''],
+              13: [''],
+              14: [''],
+              15: [''],
+              16: [''],
+              17: [''],
+              18: [''],
+              19: [''],
+              20: [''],
+              21: [''],
+              22: [''],
+              23: [''],
+              24: [''],
+              25: [''],
+              26: [''],
+              27: [''],
+              28: [''],
+            });
+          }
+
 
 
 
@@ -182,7 +229,7 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
        // console.log(base64Image);
 
 
-          var body: any ='{"insuranceTypeCode": "CAR" ,';
+          var body: any ='{"userId":"'+this.userId+'" ,"insuranceTypeCode": "CAR" ,';
 
 
           Object.keys(this.userInfo.controls).forEach(key => {

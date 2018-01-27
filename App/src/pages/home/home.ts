@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import { Platform } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
+import { Storage } from '@ionic/storage';
+
 import { CarPage } from '../car/car';
 
 @Component({
@@ -17,7 +19,7 @@ export class HomePage {
   public apiURL: any;
   public showLoginBtn: any=false;
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public http: Http,  public platform: Platform, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public http: Http,  public platform: Platform, private toastCtrl: ToastController, private storage: Storage) {
     if (this.platform.is('ios') || this.platform.is('android')) {
          // This will only print when on iOS
          this.apiURL = "http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com";
@@ -76,6 +78,7 @@ export class HomePage {
                        return false;
                      }else{
                        var temp = JSON.parse(data['_body']);
+                       this.storage.set('userId', temp.id);
                        let toast = this.toastCtrl.create({
                        message: 'Welcome back '+temp.name+" "+temp.surname,
                        duration: 4000,

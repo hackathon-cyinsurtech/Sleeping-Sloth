@@ -13,6 +13,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
     BrowserModule,
     HttpModule,
     HttpClientModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
