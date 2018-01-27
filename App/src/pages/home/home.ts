@@ -37,10 +37,20 @@ ionViewWillEnter() {
          this.showLoginBtn=false;
       }else{
         this.showLoginBtn=true;
+      this.retreivePendingQuotes(val);
+
       }
       console.log("is nullHome? "+val+ this.showLoginBtn);
     });
 }
+
+  retreivePendingQuotes(val:any){
+    this.http.get(this.apiURL+'/quote/find?userId='+val, {})
+            //.map(res => res.json())
+       .subscribe(data => {
+            console.log(data);
+       });
+  }
 
   insureMyCar(){
     this.navCtrl.push( CarPage );
@@ -121,7 +131,7 @@ ionViewWillEnter() {
                        console.log('Dismissed toast');
                       });
                       this.showLoginBtn=true;
-
+                      this.retreivePendingQuotes(temp.id);
                       toast.present();
                      }
                  });
