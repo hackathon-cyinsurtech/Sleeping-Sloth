@@ -1,4 +1,4 @@
-package com.sleepingsloth.insuredme;
+package com.sleepingsloth.insuredme.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,18 +12,19 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private String username;
+	private String email;
 	private String password;
 	private String name;
 	private String surname;
 	private String address;
+	private UserType userType;
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String username) {
+		this.email = username;
 	}
 
 	public String getPassword() {
@@ -60,6 +61,14 @@ public class User {
 
 	public long getId() {
 		return id;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 }
