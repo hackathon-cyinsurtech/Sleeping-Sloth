@@ -13,6 +13,10 @@ public class QuoteRequest {
 	private long id;
 
 	private String insuranceTypeCode;
+	
+	private boolean open;
+	
+	private boolean photosTaken;
 
 	private long userId;
 
@@ -34,5 +38,21 @@ public class QuoteRequest {
 
 	public long getId() {
 		return id;
+	}
+
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void setOpen(boolean open) {
+		this.open = open;
+	}
+
+	public boolean isPhotosTaken() {
+		return photosTaken;
+	}
+
+	public void setPhotosTaken(boolean photosTaken) {
+		this.photosTaken = photosTaken;
 	}
 }

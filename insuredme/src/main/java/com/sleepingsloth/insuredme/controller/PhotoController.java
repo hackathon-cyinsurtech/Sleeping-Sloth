@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sleepingsloth.insuredme.dao.PhotoRepository;
+import com.sleepingsloth.insuredme.dao.QuoteRequestRepository;
 import com.sleepingsloth.insuredme.domain.Photo;
+import com.sleepingsloth.insuredme.domain.QuoteRequest;
 
 @Controller
 @RequestMapping(path="/photo")
@@ -21,11 +23,20 @@ public class PhotoController {
 	
 	@Autowired
 	private PhotoRepository photoRepository;
+	@Autowired
+	private QuoteRequestRepository quoteRequestRepository;
 
 	@PostMapping(path="/add")
 	public @ResponseBody Long addPhoto (@RequestBody Photo photo) {
 		LOGGER.info("Processing photo for : " + photo.getQuoteRequestId());
 		photoRepository.save(photo);
+		QuoteRequest quote = quoteRequestRepository.findOne(photo.getQuoteRequestId());
+		
+		if (!quote.isPhotosTaken()) {
+			quote.setPhotosTaken(true);
+			quoteRequestRepository.save(quote);
+		}
+
 		LOGGER.info("Photo has been saved with id: " + photo.getId());
 		return photo.getId();
 	}
