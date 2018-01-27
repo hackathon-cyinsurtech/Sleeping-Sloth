@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sleepingsloth.insuredme.dao.QuoteRequestRepository;
 import com.sleepingsloth.insuredme.domain.QuoteRequest;
-import com.sleepingsloth.insuredme.domain.User;
 import com.sleepingsloth.insuredme.domain.UserType;
 
 @Controller
