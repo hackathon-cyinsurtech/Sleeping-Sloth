@@ -29,6 +29,8 @@ export class CarPage {
    public apiURL: any;
 
    public photo:any;
+   public questions:any;
+   public choices:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform) {
 
@@ -39,34 +41,25 @@ export class CarPage {
          this.apiURL = "/api";
        }
 
-    let headers = new Headers ();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'Bearer ');
+
+   this.http.get(this.apiURL+'/question/find?insuranceTypeCode=CAR', {})
+           //.map(res => res.json())
+
+           .subscribe(data => {
+               console.log(JSON.parse(data['_body']));
+               this.questions = JSON.parse(data['_body']);
+           });
+
+   this.http.get(this.apiURL+'/question/allchoices', {})
+           //.map(res => res.json())
+
+           .subscribe(data => {
+               console.log(JSON.parse(data['_body']));
+               this.choices = JSON.parse(data['_body']);
+           });
+
 /*
-    var body ='{"code": "Test200", "description":"Test200"}';
-console.log(body);
-console.log(JSON.stringify(body));
-
-this.http.post('/api', body, {headers: headers})
-//.map(res => res.json())
-.subscribe(data => {
-
-});*/
-
-var body: any ="";
-body = '{"quoteRequestId": "1235", "data" : "epiae tipote?" } ';
-//body.push({ data: base64Image });
-
-
-
-console.log(body);
-
-this.http.post(this.apiURL+'/photo/add', body, {headers: headers})
-//.map(res => res.json())
-.subscribe(data => {
-
-});
-
+//load photos
 this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
     //.map(res => res.json())
 
@@ -76,7 +69,7 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
         console.log(temp[0]);
         this.photo = temp[0]['data'];
     });
-
+*/
 
     this.validation_messages = {
     'email': [
@@ -168,23 +161,12 @@ startPhotoProcess(){
 
  });
 
-   /*
 
-   var body: any = [];
-   body.push({quoteRequestId: 1});
-   //body.push({ data: base64Image });
-   body.push({ data: "sadasd" });
-
-
-   this.http.post('/photo', JSON.stringify(body), {headers: headers})
-   //.map(res => res.json())
-   .subscribe(data => {
-
-   });*/
 
   }, (err) => {
    // Handle error
   });
 }
+
 
 }

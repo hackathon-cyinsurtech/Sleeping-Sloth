@@ -19,6 +19,20 @@
 
   <form [formGroup]="userInfo" (ngSubmit)="logForm()">
 
+    <ng-container *ngFor="let q of questions" >
+      {{q.question}}
+      <div *ngIf="q.type == 'FREETEXT' "><input type="text" /> </div>
+      <ng-container *ngIf="q.type != 'FREETEXT' ">
+
+           <ul>
+             <ng-container *ngFor= "let choice of choices">
+                <ng-container *ngIf="q.id == choice.questionId "><li >{{choice.choice}}</li> </ng-container>
+             </ng-container>
+           </ul>
+
+      </ng-container>
+   </ng-container>
+
      <ion-item class="inputText">
        <ion-label color="primary" floating>Email</ion-label>
        <ion-input type="email" formControlName="email"></ion-input>
@@ -83,7 +97,8 @@
         <ion-icon name="camera" style="padding-right:16px;"></ion-icon> Start Photo Processes
      </button>
 
-<img src={{this.photo}} />
+
+
 
 
 </ion-content>
