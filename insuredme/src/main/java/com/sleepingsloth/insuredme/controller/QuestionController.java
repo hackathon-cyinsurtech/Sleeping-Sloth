@@ -60,4 +60,10 @@ public class QuestionController {
 		LOGGER.info("Selecting choices for question with id: " + questionId);
 		return questionChoiceRepository.findByQuestionIdOrderById(questionId);
 	}
+	
+	
+	@GetMapping(path="/allchoices")
+	public @ResponseBody Iterable<QuestionChoice> getAllChoices() {
+		return questionChoiceRepository.findAll();
+	}
 }
