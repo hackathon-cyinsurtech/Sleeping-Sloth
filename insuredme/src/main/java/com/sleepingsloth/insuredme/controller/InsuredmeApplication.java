@@ -1,4 +1,4 @@
-	package com.sleepingsloth.insuredme;
+	package com.sleepingsloth.insuredme.controller;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sleepingsloth.insuredme.domain.User;
 
 @RestController
 @EnableAutoConfiguration
