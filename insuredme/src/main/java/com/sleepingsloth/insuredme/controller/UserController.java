@@ -1,5 +1,8 @@
 package com.sleepingsloth.insuredme.controller;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +17,13 @@ import com.sleepingsloth.insuredme.domain.UserType;
 @Controller
 @RequestMapping(path="/user")
 public class UserController {
+	private static final Logger LOGGER = Logger.getLogger( UserController.class.getName() );
+
 	@Autowired
 	private UserRepository userRepository;
 
 	@GetMapping(path="/add")
-	public @ResponseBody String addNewUser (@RequestParam String email, 
+	public @ResponseBody Long addNewUser (@RequestParam String email, 
 			@RequestParam String password,
 			@RequestParam String name,
 			@RequestParam String surname,
@@ -32,11 +37,28 @@ public class UserController {
 		n.setAddress(address);
 		n.setUserType(type);
 		userRepository.save(n);
-		return "User '" + name + "' has been saved with id: " + n.getId();
+		LOGGER.info("User '" + name + "' has been saved with id: " + n.getId());
+		return n.getId();
 	}
 
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<User> getAllUsers() {
 		return userRepository.findAll();
+	}
+	
+	@GetMapping(path = "/load")
+	public @ResponseBody User getUser(@RequestParam String email, @RequestParam String password) {
+		List<User> items = userRepository.loadUser(email, password);
+		if (items.isEmpty()){
+			return null;
+		} else {
+			return items.get(0);
+		}
+	}
+	
+	
+	@GetMapping(path = "/loadUser")
+	public @ResponseBody User getUser(@RequestParam String email) {
+		return userRepository.findTopByEmail(email);
 	}
 }
