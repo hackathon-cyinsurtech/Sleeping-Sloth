@@ -70,12 +70,18 @@
        {{validation.message}}
      </div>
     </ng-container>
-    <div class="inputText" style="padding-bottom:26px; background: #FFF;" ></div>
+    <div class="inputText" style="padding-bottom:54px; background: #FFF;" ></div>
 
      <div class="inputText" style="margin: 16px auto 16px auto; width:100%;">
        <button ion-button full type="submit" [disabled]="!userInfo.valid" style="max-width:300px;">Submit</button>
      </div>
    </form>
+
+
+     <div class="title" style="margin: 16px auto 16px auto;">To get a quote, upload your car's photos:</div>
+     <button ion-button full style="max-width:300px; height:200px; margin: 16px auto 16px auto;" (click)="startPhotoProcess()">
+        <ion-icon name="camera" style="padding-right:16px;"></ion-icon> Start Photo Processes
+     </button>
 
 
 
