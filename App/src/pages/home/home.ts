@@ -39,10 +39,11 @@ ionViewWillEnter() {
          this.showLoginBtn=false;
       }else{
         this.showLoginBtn=true;
-      this.retreivePendingQuotes(val);
+        this.retreivePendingQuotes(val);
 
       }
       console.log("is nullHome? "+val+ this.showLoginBtn);
+        console.log(this.pendingQuotes);
     });
 }
 
@@ -50,6 +51,7 @@ ionViewWillEnter() {
     this.http.get(this.apiURL+'/quote/find?userId='+val, {})
             //.map(res => res.json())
        .subscribe(data => {
+       console.log("pendingQUotes");
             console.log(data);
             this.pendingQuotes = JSON.parse(data['_body']);
             console.log(this.pendingQuotes);
@@ -68,8 +70,8 @@ ionViewWillEnter() {
 
   logout(){
      this.storage.set('userId', "");
-     this.showLoginBtn=true;
-
+     this.showLoginBtn=false;
+     this.pendingQuotes = undefined;
      let toast = this.toastCtrl.create({
      message: 'Logout Succsessful!',
      duration: 4000,
