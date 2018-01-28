@@ -14,7 +14,7 @@ public class QuoteRequest {
 
 	private String insuranceTypeCode;
 	
-	private boolean open;
+	private boolean open = true;
 	
 	private boolean photosTaken;
 

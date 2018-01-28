@@ -84,6 +84,11 @@ public class QuoteRequestController {
 	public @ResponseBody Iterable<QuoteRequest> getAllQuotes() {
 		return quoteRequestRepository.findAll();
 	}
+	
+	@GetMapping(path = "/allOpen")
+	public @ResponseBody Iterable<QuoteRequest> getAllOpenWithPhotosTaken() {
+		return quoteRequestRepository.findByPhotosTakenAndOpen(true, true);
+	}
 
 	@GetMapping(path = "/find")
 	public @ResponseBody Iterable<QuoteModel> getAllQuotesForUser(@RequestParam long userId) {
