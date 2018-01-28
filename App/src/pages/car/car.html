@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Insure My Car</ion-title>
+    <ion-title style="text-align:right;">insure my awesome car</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -34,7 +34,7 @@
       <div *ngIf="q.type != 'FREETEXT' ">
         <ion-item class="inputText">
           <ion-label color="primary">{{q.question}}</ion-label>
-            <ion-select formControlName="{{q.id}}">
+            <ion-select formControlName="{{q.id}}" interface="action-sheet">
                <ng-container *ngFor= "let choice of choices">
                       <ng-container *ngIf="q.id == choice.questionId ">
                         <ion-option value="{{choice.choice}}">{{choice.choice}}</ion-option>
@@ -112,6 +112,9 @@
      <div class="title" style="margin: 16px auto 16px auto;">To get a quote, upload your car's photos:</div>
      <button ion-button full style="max-width:300px; height:200px; margin: 16px auto 16px auto;" (click)="startPhotoProcess()">
         <ion-icon name="camera" style="padding-right:16px;"></ion-icon> Start Photo Processes
+     </button>
+     <button ion-button color="secondary" full style="max-width:300px; height:50px; margin: 16px auto 16px auto;" (click)="finishedPhotoProcess()" [hidden]="!onePhotoSaved">
+       Finish and ask for quotes
      </button>
 </div>
 

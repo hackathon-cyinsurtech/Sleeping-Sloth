@@ -22,7 +22,7 @@ export class HomePage {
   public pendingQuotes: any;
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public http: Http,  public platform: Platform, private toastCtrl: ToastController, private storage: Storage) {
-    if (this.platform.is('ios') || this.platform.is('android')) {
+    if (this.platform.is('ios') || this.platform.is('android') ) {
          // This will only print when on iOS
          this.apiURL = "http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com";
        }else{
@@ -158,6 +158,10 @@ ionViewWillEnter() {
 
   loadPendingQuote(id:any){
     console.log(id);
+    this.navCtrl.push(CarPage, {
+      id: id,
+      takePhoto: true
+    });
   }
 
 }

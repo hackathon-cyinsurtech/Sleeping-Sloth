@@ -36,12 +36,21 @@ export class CarPage {
    public detailsSaved:boolean =false;
    public isLoggedIn:boolean = false;
    public userId:any = "";
+   public idToUploadPhoto:any;
+   public pageVisitType:any;
+   public onePhotoSaved:boolean=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform, private storage: Storage) {
 
+    this.idToUploadPhoto = navParams.get("id");
+    this.pageVisitType = navParams.get("takePhoto");
 
+    if(this.pageVisitType){
+      this.detailsSaved = true;
+    }
 
-    if (this.platform.is('ios') || this.platform.is('android')) {
+//
+    if (this.platform.is('ios') || this.platform.is('android') ) {
          // This will only print when on iOS
          this.apiURL = "http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com";
        }else{
@@ -265,6 +274,9 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
       //.map(res => res.json())
       .subscribe(data => {
           console.log("Insurance data sent");
+          console.log(data);
+          this.idToUploadPhoto = data['_body'];
+          this.storage.set('userId', data['_body']);
       });
 
 
@@ -296,13 +308,16 @@ startPhotoProcess(){
 
 
    var body: any ="";
-   body = '{"quoteRequestId": "1", "data" : "'+base64Image+'"}';
+
+   body = '{"quoteRequestId": "'+this.idToUploadPhoto+'", "data" : "'+base64Image+'"}';
  console.log(body);
 
  this.http.post(this.apiURL+'/photo/add', body, {headers: headers})
  //.map(res => res.json())
  .subscribe(data => {
-
+    console.log("Photo Uploaded");
+    this.startPhotoProcess();
+    this.onePhotoSaved = true;
  });
 
 
@@ -312,5 +327,8 @@ startPhotoProcess(){
   });
 }
 
+finishedPhotoProcess(){
+  this.navCtrl.pop();
+}
 
 }
