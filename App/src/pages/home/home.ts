@@ -39,7 +39,21 @@ ionViewWillEnter() {
          this.showLoginBtn=false;
       }else{
         this.showLoginBtn=true;
-        this.retreivePendingQuotes(val);
+        console.log("val="+val);
+        console.log("showLoginBtn="+this.showLoginBtn);
+
+        this.platform.ready().then((readySource) => {
+          this.http.get(this.apiURL+'/quote/find?userId='+val, {})
+                  //.map(res => res.json())
+             .subscribe(data => {
+             console.log("pendingQUotes");
+                  console.log(data);
+                  this.pendingQuotes = JSON.parse(data['_body']);
+                  console.log(this.pendingQuotes);
+             });
+        });
+
+
 
       }
       console.log("is nullHome? "+val+ this.showLoginBtn);

@@ -58,4 +58,17 @@
     </ng-container>
 </ng-container>
 
+<div class="title" style="margin:26px 0px 25px 0px; padding:0px;" *ngIf="pendingQuotes != undefined ">Awaiting Offer</div>
+<ng-container *ngFor="let pending of pendingQuotes" >
+  <ng-container *ngIf="pending.quoteRequest.photosTaken == true ">
+  <ion-item style="max-width:400px; margin:0px auto 0px auto;" (click)="loadPendingQuote(pending.quoteRequest.id)">
+
+      <div style=" line-height:26px; float:left;">{{pending.quoteRequest.insuranceTypeCode}} {{pending.carRegistrationNumber}}</div> <div style="float:right; "> <ion-icon style="font-size:25px;" name="arrow-dropright-circle"></ion-icon></div><div style="float:right; line-height:26px; margin-right:16px;"></div>
+
+  </ion-item>
+    </ng-container>
+</ng-container>
+
+
+
 </ion-content >
