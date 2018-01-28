@@ -11,8 +11,26 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
+
+  <ion-item class="inputText" >
+    <ion-label color="primary">Address</ion-label>
+    <ion-input type="text" value="{{address}}" disabled></ion-input>
+  </ion-item>
+
+  <ng-container *ngFor="let q of questions" >
+
+    <ion-item class="inputText">
+      <ion-label color="primary">{{q.question}}</ion-label>
+
+
+
+   </ion-item>
+
+
+ </ng-container>
+
+
+ <img src="{{photos}}" />
 
 </ion-content>

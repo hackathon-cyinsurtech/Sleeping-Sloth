@@ -10,6 +10,7 @@ import { Storage } from '@ionic/storage';
 
 import { CarPage } from '../car/car';
 import { OffersPage } from '../offers/offers';
+import { RequestsPage } from '../requests/requests';
 
 @Component({
   selector: 'page-home',
@@ -227,6 +228,13 @@ ionViewWillEnter() {
   loadWaitingOffer(id:any){
     console.log(id);
     this.navCtrl.push(OffersPage, {
+      id: id
+    });
+  }
+
+  loadRequests(id:any){
+    console.log(id);
+    this.navCtrl.push(RequestsPage, {
       id: id
     });
   }
