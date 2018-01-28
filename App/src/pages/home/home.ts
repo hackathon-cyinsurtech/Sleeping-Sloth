@@ -19,8 +19,10 @@ export class HomePage {
 
   public apiURL: any;
   public showLoginBtn: any=false;
+  public userType: any;
 
   public pendingQuotes: any;
+  public newQuoteRequests: any;
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, public http: Http,  public platform: Platform, private toastCtrl: ToastController, private storage: Storage) {
     if (this.platform.is('ios') || this.platform.is('android') ) {
@@ -38,6 +40,7 @@ ionViewWillEnter() {
   this.storage.get('userId').then((val) => {
       if(val == "" || val == null){
          this.showLoginBtn=false;
+		 console.log("User type " + this.userType);
       }else{
         this.showLoginBtn=true;
         console.log("val="+val);
@@ -78,6 +81,18 @@ ionViewWillEnter() {
                console.log(data);
           });
   }
+  
+  
+  retreiveNewQuoteRequests(){
+     this.http.get(this.apiURL+'/quote/allOpen', {})
+            //.map(res => res.json())
+       .subscribe(data => {
+       console.log("allOpenQuotes");
+            console.log(data);
+            this.newQuoteRequests = JSON.parse(data['_body']);
+            console.log(this.newQuoteRequests);
+       });
+  }
 
   insureMyCar(){
     this.navCtrl.push( CarPage );
@@ -86,6 +101,8 @@ ionViewWillEnter() {
   logout(){
      this.storage.set('userId', "");
      this.showLoginBtn=false;
+	 this.userType = "";
+	 console.log("User type " + this.userType);
      this.pendingQuotes = undefined;
      let toast = this.toastCtrl.create({
      message: 'Logout Succsessful!',
@@ -134,7 +151,7 @@ ionViewWillEnter() {
 
                      if(data['_body']==""){
                          let toast = this.toastCtrl.create({
-                         message: 'Error loggin in. Please try again!',
+                         message: 'Error logging in. Please try again!',
                          duration: 4000,
                          position: 'top'
                         });
@@ -158,8 +175,18 @@ ionViewWillEnter() {
                        console.log('Dismissed toast');
                       });
                       this.showLoginBtn=true;
-                      this.retreivePendingQuotes(temp.id);
-                      toast.present();
+					  this.userType = temp.userType;
+					  console.log("User type " + temp.userType);
+					  
+					  if(this.userType != 'INSURANCE_COMPANY') {
+						this.retreivePendingQuotes(temp.id);
+					  } else {
+						this.retreiveNewQuoteRequests();						  
+						console.log("This is an Insurance company");
+					  }
+                      
+					  
+					  toast.present();
                      }
                  });
 

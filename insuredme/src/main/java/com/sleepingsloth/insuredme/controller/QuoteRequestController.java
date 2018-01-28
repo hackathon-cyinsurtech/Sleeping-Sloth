@@ -82,11 +82,13 @@ public class QuoteRequestController {
 
 	@GetMapping(path = "/all")
 	public @ResponseBody Iterable<QuoteRequest> getAllQuotes() {
+		LOGGER.info("getAllQuotes (/quote/all)");
 		return quoteRequestRepository.findAll();
 	}
 	
 	@GetMapping(path = "/allOpen")
 	public @ResponseBody Iterable<QuoteRequest> getAllOpenWithPhotosTaken() {
+		LOGGER.info("getAllOpenWithPhotosTaken (/quote/allOpen)");
 		return quoteRequestRepository.findByPhotosTakenAndOpen(true, true);
 	}
 
