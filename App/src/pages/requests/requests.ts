@@ -27,6 +27,7 @@ export class RequestsPage {
     public address: any;
     public qAndA: any;
     public photos: any;
+    public photos2: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public platform: Platform) {
@@ -64,13 +65,16 @@ export class RequestsPage {
             });
 
 
-            this.http.get(this.apiURL+'/photo/find?quoteRequestId=34', {})
+            this.http.get(this.apiURL+'/photo/find?quoteRequestId=17', {})
                     //.map(res => res.json())
                    .subscribe(data => {
                         console.log(data['_body']);
                         var te = JSON.parse(data['_body']);
                         this.photos = te[0].data;
+                        this.photos2 = te[1].data;
                     });
+
+
 
   }
 

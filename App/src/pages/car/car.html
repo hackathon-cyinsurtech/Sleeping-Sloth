@@ -51,7 +51,7 @@
 <div class="title" style="margin: 26px 0px 26px 0px;" [hidden]="isLoggedIn">Personal Information</div>
      <ion-item class="inputText"  [hidden]="isLoggedIn">
        <ion-label color="primary" floating>Email</ion-label>
-       <ion-input type="email" formControlName="email"></ion-input>
+       <ion-input type="email" formControlName="email" value="test@test.com"></ion-input>
      </ion-item>
      <ng-container *ngFor="let validation of validation_messages.email" >
        <div class="error-message" *ngIf=" userInfo.get('email').hasError(validation.type) && (userInfo.get('email').dirty || userInfo.get('email').touched)">
@@ -61,7 +61,7 @@
 
      <ion-item class="inputText"  [hidden]="isLoggedIn">
        <ion-label color="primary" floating>Password</ion-label>
-       <ion-input type="password" formControlName="password"></ion-input>
+       <ion-input type="password" formControlName="password" value="Sloth1"></ion-input>
      </ion-item>
      <ng-container *ngFor="let validation of validation_messages.password">
        <div class="error-message" *ngIf=" userInfo.get('password').hasError(validation.type) && (userInfo.get('password').dirty || userInfo.get('password').touched)">
@@ -71,7 +71,7 @@
 
      <ion-item class="inputText"  [hidden]="isLoggedIn">
        <ion-label color="primary" floating>Name</ion-label>
-       <ion-input type="text" formControlName="name"></ion-input>
+       <ion-input type="text" formControlName="name" value="Sleeping"></ion-input>
      </ion-item>
      <ng-container *ngFor="let validation of validation_messages.name">
        <div class="error-message" *ngIf=" userInfo.get('name').hasError(validation.type) && (userInfo.get('name').dirty || userInfo.get('name').touched)">
@@ -82,7 +82,7 @@
 
      <ion-item class="inputText" [hidden]="isLoggedIn">
        <ion-label color="primary" floating>Surname</ion-label>
-       <ion-input type="text" formControlName="surname"></ion-input>
+       <ion-input type="text" formControlName="surname" value="Sloth"></ion-input>
      </ion-item>
      <ng-container *ngFor="let validation of validation_messages.surname">
        <div class="error-message" *ngIf=" userInfo.get('surname').hasError(validation.type) && (userInfo.get('surname').dirty || userInfo.get('surname').touched)">
@@ -93,7 +93,7 @@
 
      <ion-item class="inputText"  [hidden]="isLoggedIn">
        <ion-label color="primary" floating>Address</ion-label>
-       <ion-input type="text" formControlName="address"></ion-input>
+       <ion-input type="text" formControlName="address" value="7 Tree Rd"></ion-input>
      </ion-item>
      <ng-container *ngFor="let validation of validation_messages.address">
        <div class="error-message" *ngIf=" userInfo.get('address').hasError(validation.type) && (userInfo.get('address').dirty || userInfo.get('address').touched)">
