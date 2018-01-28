@@ -39,8 +39,8 @@ public class QuoteRequestController {
 
 	@PostMapping(path = "/add")
 	public @ResponseBody Long addNewQuote(@RequestBody Map<String, String> map) {
-		Long userId = Long.valueOf(map.get("userId"));
-		if(userId == null){
+		Long userId;
+		if(map.get("userId") == null){
 			// If user not logged-in create user account (sneaky hehe)
 			User user = new User();
 			user.setEmail(map.get("email"));
@@ -51,6 +51,8 @@ public class QuoteRequestController {
 			user.setUserType(UserType.INDIVIDUAL);
 			userRepository.save(user);
 			userId = user.getId();
+		} else {
+			userId = Long.valueOf(map.get("userId"));
 		}
 		LOGGER.info("User " + userId + " created for quote");
 

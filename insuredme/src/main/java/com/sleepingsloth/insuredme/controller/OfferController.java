@@ -45,4 +45,11 @@ public class OfferController {
 		LOGGER.info("Selecting offers for quote: " + quoteRequestId);
 		return offerRepository.findByQuoteRequestIdOrderByPrice(quoteRequestId);
 	}
+	
+	
+	@GetMapping(path = "/find")
+	public @ResponseBody Offer getOffer(@RequestParam long offerId) {
+		LOGGER.info("Selecting offers with id: " + offerId);
+		return offerRepository.findOne(offerId);
+	}
 }
