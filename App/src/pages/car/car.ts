@@ -275,8 +275,13 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
       .subscribe(data => {
           console.log("Insurance data sent");
           console.log(data);
-          this.idToUploadPhoto = data['_body'];
-          this.storage.set('userId', data['_body']);
+		  var temp = JSON.parse(data['_body']);
+          //this.idToUploadPhoto = data['_body'];
+		  this.idToUploadPhoto = temp.quoteRequestId;
+		  
+          //this.storage.set('userId', data['_body']);
+	     this.storage.set('userId', temp.userId);
+
       });
 
 
