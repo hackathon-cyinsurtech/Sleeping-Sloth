@@ -7,7 +7,7 @@
 
       </ion-buttons>
       <ion-buttons  end [hidden]="!showLoginBtn">
-		
+
         <button class="navLBtn" (click)="logout()" >{{userId}} Logout</button>
 
       </ion-buttons>
@@ -40,7 +40,7 @@
 
 	  <button class="btnOptions">
 		<ion-icon name="medkit" style="icons"></ion-icon>
-		<div class="insuranceType">your ok body</div>
+		<div class="insuranceType">your okay body</div>
 	  </button>
 
 	</div>
@@ -66,7 +66,7 @@
 	  </ion-item>
 		</ng-container>
 	</ng-container>
-	
+
 	<div class="title" style="margin:26px 0px 25px 0px; padding:0px;" *ngIf="pendingQuotes != undefined ">Completed Quotes</div>
 	<ng-container *ngFor="let pending of pendingQuotes" >
 	  <ng-container *ngIf="pending.quoteRequest.photosTaken && !pending.quoteRequest.open">
@@ -81,19 +81,31 @@
 <ng-container *ngIf="userType == 'INSURANCE_COMPANY' " >
 
 	<div class="title" style="margin:26px 0px 25px 0px; padding:0px;" *ngIf="newQuoteRequests != undefined ">New Requests</div>
-	<button  class="title">Subscribe</button>
-	  
+
+<div style="    max-width: 400px;  margin: 0px auto 0px auto;">
+  <button ion-button class="title" style="width:100%; text-transform:none; height: 58px;">subscription filters</button>
+</div>
+
 	<ng-container *ngFor="let pending of newQuoteRequests" >
 	  <ion-item style="max-width:400px; margin:0px auto 0px auto;" (click)="loadWaitingOffer(pending.id)">
 		  <div style=" line-height:26px; float:left;">{{pending.insuranceTypeCode}}</div> <div style="float:right; "> <ion-icon style="font-size:25px;" name="arrow-dropright-circle"></ion-icon></div><div style="float:right; line-height:26px; margin-right:16px;">Make an offer</div>
 	  </ion-item>
 	</ng-container>
-	
+
 	<div class="title" style="margin:26px 0px 25px 0px; padding:0px;" *ngIf="newQuoteRequests != undefined ">Your Pending Offers</div>
+  <ion-item style="max-width:400px; margin:0px auto 0px auto;">
+  No pending offers
+</ion-item>
 
     <div class="title" style="margin:26px 0px 25px 0px; padding:0px;" *ngIf="newQuoteRequests != undefined ">Accepted Offers</div>
+    <ion-item style="max-width:400px; margin:0px auto 0px auto;">
+    No accepted offers
+  </ion-item>
 
 	<div class="title" style="margin:26px 0px 25px 0px; padding:0px;" *ngIf="newQuoteRequests != undefined ">Rejected Offers</div>
+  <ion-item style="max-width:400px; margin:0px auto 0px auto;">
+  No rejected offers
+</ion-item>
 
 </ng-container>
 
