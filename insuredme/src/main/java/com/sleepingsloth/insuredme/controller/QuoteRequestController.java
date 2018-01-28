@@ -38,7 +38,7 @@ public class QuoteRequestController {
 	private AnswerRepository answerRepository;
 
 	@PostMapping(path = "/add")
-	public @ResponseBody Long addNewQuote(@RequestBody Map<String, String> map) {
+	public @ResponseBody QuoteRequest addNewQuote(@RequestBody Map<String, String> map) {
 		Long userId;
 		if(map.get("userId") == null){
 			// If user not logged-in create user account (sneaky hehe)
@@ -77,7 +77,7 @@ public class QuoteRequestController {
 			}
 		}
 		LOGGER.info("Quote saving completed");
-		return quoteRequest.getId();
+		return quoteRequest;
 	}
 
 	@GetMapping(path = "/all")
