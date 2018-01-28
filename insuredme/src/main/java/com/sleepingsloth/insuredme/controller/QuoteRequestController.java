@@ -120,4 +120,14 @@ public class QuoteRequestController {
 		
 		return models;
 	}
+	
+	
+	@GetMapping(path = "/buyQuote")
+	public @ResponseBody void updateQuote(@RequestParam long quoteRequestId) {
+		LOGGER.info("buyQuote");
+		QuoteRequest quote = quoteRequestRepository.findOne(quoteRequestId);
+		quote.setOpen(false);
+		quoteRequestRepository.save(quote);
+		LOGGER.info("Bought " + quote.getId());
+	}
 }
