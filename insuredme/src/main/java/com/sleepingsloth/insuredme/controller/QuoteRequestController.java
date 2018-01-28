@@ -24,6 +24,7 @@ import com.sleepingsloth.insuredme.domain.QuoteRequest;
 import com.sleepingsloth.insuredme.domain.User;
 import com.sleepingsloth.insuredme.domain.UserType;
 import com.sleepingsloth.insuredme.model.QuoteModel;
+import com.sleepingsloth.insuredme.model.QuoteModelFull;
 
 @Controller
 @RequestMapping(path = "/quote")
@@ -91,6 +92,20 @@ public class QuoteRequestController {
 		LOGGER.info("getAllOpenWithPhotosTaken (/quote/allOpen)");
 		return quoteRequestRepository.findByPhotosTakenAndOpen(true, true);
 	}
+	
+	
+	@GetMapping(path = "/findQuote")
+	public @ResponseBody QuoteModelFull getQuote(@RequestParam long quoteRequestId) {
+		LOGGER.info("findQuote (/quote/findQuote)");
+		QuoteRequest quote = quoteRequestRepository.findOne(quoteRequestId);
+		Iterable<Answer> answers = answerRepository.findByQuoteRequestId(quote.getId());
+		User user = userRepository.findOne(quote.getUserId());
+		QuoteModelFull model = new QuoteModelFull();
+		model.setAnswers(answers);
+		model.setQuoteRequest(quote);
+		model.setUser(user);
+		return model;
+	}
 
 	@GetMapping(path = "/find")
 	public @ResponseBody Iterable<QuoteModel> getAllQuotesForUser(@RequestParam long userId) {
@@ -104,5 +119,15 @@ public class QuoteRequestController {
 		}
 		
 		return models;
+	}
+	
+	
+	@GetMapping(path = "/buyQuote")
+	public @ResponseBody void updateQuote(@RequestParam long quoteRequestId) {
+		LOGGER.info("buyQuote");
+		QuoteRequest quote = quoteRequestRepository.findOne(quoteRequestId);
+		quote.setOpen(false);
+		quoteRequestRepository.save(quote);
+		LOGGER.info("Bought " + quote.getId());
 	}
 }

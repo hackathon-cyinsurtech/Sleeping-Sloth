@@ -87,6 +87,14 @@ export class OfferPage {
 
   buy(){
     console.log("BUY");
+	
+	this.http.get(this.apiURL+'/quote/buyQuote?quoteRequestId=' + this.quoteRequestId, {})
+
+           .subscribe(data => {
+               console.log("Bought " + this.quoteRequestId);
+           });
+
+
     this.navCtrl.push(BoughtPage, {
 
     });
