@@ -24,6 +24,7 @@ import com.sleepingsloth.insuredme.domain.QuoteRequest;
 import com.sleepingsloth.insuredme.domain.User;
 import com.sleepingsloth.insuredme.domain.UserType;
 import com.sleepingsloth.insuredme.model.QuoteModel;
+import com.sleepingsloth.insuredme.model.QuoteModelFull;
 
 @Controller
 @RequestMapping(path = "/quote")
@@ -90,6 +91,20 @@ public class QuoteRequestController {
 	public @ResponseBody Iterable<QuoteRequest> getAllOpenWithPhotosTaken() {
 		LOGGER.info("getAllOpenWithPhotosTaken (/quote/allOpen)");
 		return quoteRequestRepository.findByPhotosTakenAndOpen(true, true);
+	}
+	
+	
+	@GetMapping(path = "/findQuote")
+	public @ResponseBody QuoteModelFull getQuote(@RequestParam long quoteRequestId) {
+		LOGGER.info("findQuote (/quote/findQuote)");
+		QuoteRequest quote = quoteRequestRepository.findOne(quoteRequestId);
+		Iterable<Answer> answers = answerRepository.findByQuoteRequestId(quote.getId());
+		User user = userRepository.findOne(quote.getUserId());
+		QuoteModelFull model = new QuoteModelFull();
+		model.setAnswers(answers);
+		model.setQuoteRequest(quote);
+		model.setUser(user);
+		return model;
 	}
 
 	@GetMapping(path = "/find")

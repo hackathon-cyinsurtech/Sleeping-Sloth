@@ -1,5 +1,15 @@
 # Sleeping-Sloth
 
+#Database
+Host: aali59sginzk8e.c9jeiy9iz9eo.us-east-2.rds.amazonaws.com
+Username: sleepingsloth
+Password: sleepingsloth1234theo
+type: MySQL
+
+#Application server Host
+http://default-environment.nmisbuxyma.us-east-2.elasticbeanstalk.com
+
+
 ## Android/iOS application
 Requirements: Ionic/Cordova
 
