@@ -50,7 +50,7 @@ padding-right: 26px;
 
 
 
-ion-content {
+.backg {
 	width: 100wh;
 	height: 100vh;
 	color: #fff;
@@ -122,4 +122,13 @@ h6 {
   background-color: rgba(35, 35, 35, 0.23137254901960785);
     color: #FFF;
     border-radius:6px;
+}
+
+.toolbar-background {
+  background-color: #FFF;
+}
+
+.navLBtn{
+  height: 42px;
+  line-height: 42px;
 }
