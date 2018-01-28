@@ -9,6 +9,7 @@ import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { CarPage } from '../car/car';
+import { OffersPage } from '../offers/offers';
 
 @Component({
   selector: 'page-home',
@@ -175,6 +176,13 @@ ionViewWillEnter() {
     this.navCtrl.push(CarPage, {
       id: id,
       takePhoto: true
+    });
+  }
+
+  loadWaitingOffer(id:any){
+    console.log(id);
+    this.navCtrl.push(OffersPage, {
+      id: id
     });
   }
 

@@ -8,6 +8,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 import { CarPage } from '../pages/car/car';
+import { OffersPage } from '../pages/offers/offers';
+import { OfferPage } from '../pages/offer/offer';
 
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,7 +22,9 @@ import { IonicStorageModule } from '@ionic/storage';
   declarations: [
     MyApp,
     HomePage,
-    CarPage
+    CarPage,
+    OffersPage,
+    OfferPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { IonicStorageModule } from '@ionic/storage';
   entryComponents: [
     MyApp,
     HomePage,
-    CarPage
+    CarPage,
+    OffersPage,
+    OfferPage
   ],
   providers: [
     StatusBar,
