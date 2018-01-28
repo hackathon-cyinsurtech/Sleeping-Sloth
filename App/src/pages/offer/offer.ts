@@ -61,7 +61,7 @@ export class OfferPage {
                    this.details = JSON.parse(data['_body']);
                    console.log(this.details.id);
 
-                   this.coverType = this.details.coverType;
+                   this.coverType = this.details.offer.coverType;
                    this.driverCover = this.details.offer.driverCover;
                    this.excess = this.details.offer.excess;
                    this.id = this.details.offer.id;
