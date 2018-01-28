@@ -7,12 +7,66 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>offers</ion-title>
+    <ion-title style="text-align:right;">Offers</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <div class="title" style="margin:26px 0px 25px 0px; padding:0px;">Available Offers</div>
+
+  <ion-item style="max-width:400px; margin:0px auto 0px auto;" *ngIf="offers == undefined ">
+
+      <div style=" line-height:26px; float:left;">No offers have been given yet!</div>
+
+  </ion-item>
+
+  <ng-container *ngFor="let offer of offers" >
+
+    <ion-item style="max-width:400px; margin:0px auto 0px auto;" (click)="loadOfferDetails(offer.quoteRequestId)">
+
+
+
+
+        <div style="width:100%; margin:8px 0 8px 0; text-align:center;">
+            Insurance Company
+        </div>
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Price
+          </div>
+          <div class="customColumn alignLeft">
+              {{offer.price}}€
+          </div>
+        </div>
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Coverage
+          </div>
+          <div class="customColumn alignLeft">
+              {{offer.coverType}}
+          </div>
+        </div>
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Excess
+          </div>
+          <div class="customColumn alignLeft">
+              {{offer.excess}}€
+          </div>
+        </div>
+
+           <div style="float:right; ">
+              <ion-icon style="font-size:25px;" name="arrow-dropright-circle"></ion-icon>
+           </div>
+           <div style="float:right; line-height:26px; margin-right:16px;">more detail</div>
+    </ion-item>
+
+  </ng-container>
+
+
+
 
 </ion-content>
