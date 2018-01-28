@@ -22,6 +22,7 @@ import { OfferPage } from '../offer/offer';
 export class OffersPage {
 
   public offers: any;
+  public apiURL: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,  public platform: Platform) {
     if (this.platform.is('ios') || this.platform.is('android') ) {
