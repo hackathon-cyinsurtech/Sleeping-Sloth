@@ -17,16 +17,24 @@ ion-toast.error .toast-wrapper {
 }
 
 .icons{
+      margin: 16px;
+}
+
+.products{
+  width:100%;
+  margin:16px auto 16px auto;
 }
 
 ion-icon {
     font-size: 40px; //Preferred size here
-
+    float: right;
+padding-right: 26px;
 }
 
 .insuranceType{
   font-size:28px;
   margin: 16px;
+  float:left;
 }
 
 
@@ -107,6 +115,11 @@ h6 {
 
 
 .btnOptions{
-  width:90%;
+  width:70%;
   padding: 16px 0px 0px 0px;
+  margin-left: 15%;
+  margin-right: 15%;
+  background-color: rgba(35, 35, 35, 0.23137254901960785);
+    color: #FFF;
+    border-radius:6px;
 }
