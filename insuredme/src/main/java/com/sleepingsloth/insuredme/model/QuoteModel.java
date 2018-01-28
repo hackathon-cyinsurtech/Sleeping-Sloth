@@ -1,4 +1,6 @@
-package com.sleepingsloth.insuredme.domain;
+package com.sleepingsloth.insuredme.model;
+
+import com.sleepingsloth.insuredme.domain.QuoteRequest;
 
 public class QuoteModel {
 

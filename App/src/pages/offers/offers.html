@@ -19,26 +19,26 @@
 
   <ion-item style="max-width:400px; margin:0px auto 0px auto;" *ngIf="offers == undefined ">
 
-      <div style=" line-height:26px; float:left;">No offers have been given yet!</div>
+      <div style=" line-height:26px; float:left;">You have not received any offers yet. Bare with us!</div>
 
   </ion-item>
 
   <ng-container *ngFor="let offer of offers" >
 
-    <ion-item style="max-width:400px; margin:0px auto 0px auto;" (click)="loadOfferDetails(offer.id)">
+    <ion-item style="max-width:400px; margin:0px auto 0px auto;" (click)="loadOfferDetails(offer.offer.id)">
 
 
 
 
         <div style="width:100%; margin:8px 0 8px 0; text-align:center;">
-            Insurance Company
+            <strong>Insurance Company:</strong> {{offer.user.name}} {{offer.user.surname}}
         </div>
         <div style="width:100%">
           <div class="customColumn alignRight">
               Price
           </div>
           <div class="customColumn alignLeft">
-              {{offer.price}}€
+              {{offer.offer.price}}€
           </div>
         </div>
         <div style="width:100%">
@@ -46,7 +46,7 @@
               Coverage
           </div>
           <div class="customColumn alignLeft">
-              {{offer.coverType}}
+              {{offer.offer.coverType}}
           </div>
         </div>
         <div style="width:100%">
@@ -54,7 +54,7 @@
               Excess
           </div>
           <div class="customColumn alignLeft">
-              {{offer.excess}}€
+              {{offer.offer.excess}}€
           </div>
         </div>
 

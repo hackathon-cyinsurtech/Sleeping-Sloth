@@ -1,5 +1,8 @@
 package com.sleepingsloth.insuredme.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sleepingsloth.insuredme.dao.OfferRepository;
+import com.sleepingsloth.insuredme.dao.UserRepository;
 import com.sleepingsloth.insuredme.domain.Offer;
+import com.sleepingsloth.insuredme.model.OfferModel;
 
 @Controller
 @RequestMapping(path = "/offer")
@@ -20,6 +25,8 @@ public class OfferController {
 
 	@Autowired
 	private OfferRepository offerRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	@PostMapping(path = "/add")
 	public @ResponseBody Long addNewQuote(@RequestBody Offer offer) {
@@ -41,15 +48,27 @@ public class OfferController {
 	
 	
 	@GetMapping(path = "/findForQuote")
-	public @ResponseBody Iterable<Offer> getAllOffersForQuote(@RequestParam long quoteRequestId) {
+	public @ResponseBody Iterable<OfferModel> getAllOffersForQuote(@RequestParam long quoteRequestId) {
 		LOGGER.info("Selecting offers for quote: " + quoteRequestId);
-		return offerRepository.findByQuoteRequestIdOrderByPrice(quoteRequestId);
+		Iterable<Offer> offers = offerRepository.findByQuoteRequestIdOrderByPrice(quoteRequestId);
+		List<OfferModel> offersModel = new ArrayList<OfferModel>();
+		for(Offer offer : offers) {
+			OfferModel offerModel = new OfferModel();
+			offerModel.setOffer(offer);
+			offerModel.setUser(userRepository.findOne(offer.getUserId()));
+			offersModel.add(offerModel);
+		}
+		return offersModel;
 	}
 	
 	
 	@GetMapping(path = "/find")
-	public @ResponseBody Offer getOffer(@RequestParam long offerId) {
+	public @ResponseBody OfferModel getOffer(@RequestParam long offerId) {
 		LOGGER.info("Selecting offers with id: " + offerId);
-		return offerRepository.findOne(offerId);
+		Offer offer = offerRepository.findOne(offerId);
+		OfferModel offerModel = new OfferModel();
+		offerModel.setOffer(offer);
+		offerModel.setUser(userRepository.findOne(offer.getUserId()));
+		return offerModel;
 	}
 }

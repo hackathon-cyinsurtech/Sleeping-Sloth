@@ -278,9 +278,13 @@ this.http.get(this.apiURL+'/photo/find?quoteRequestId=1', {})
 		  var temp = JSON.parse(data['_body']);
           //this.idToUploadPhoto = data['_body'];
 		  this.idToUploadPhoto = temp.quoteRequestId;
+		  console.log(temp);
+		  console.log(temp.quoteRequestId);
 		  
           //this.storage.set('userId', data['_body']);
 	     this.storage.set('userId', temp.userId);
+	     console.log(temp.quoteRequestId);
+
 
       });
 

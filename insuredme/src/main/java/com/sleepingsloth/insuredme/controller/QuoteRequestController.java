@@ -20,10 +20,10 @@ import com.sleepingsloth.insuredme.dao.AnswerRepository;
 import com.sleepingsloth.insuredme.dao.QuoteRequestRepository;
 import com.sleepingsloth.insuredme.dao.UserRepository;
 import com.sleepingsloth.insuredme.domain.Answer;
-import com.sleepingsloth.insuredme.domain.QuoteModel;
 import com.sleepingsloth.insuredme.domain.QuoteRequest;
 import com.sleepingsloth.insuredme.domain.User;
 import com.sleepingsloth.insuredme.domain.UserType;
+import com.sleepingsloth.insuredme.model.QuoteModel;
 
 @Controller
 @RequestMapping(path = "/quote")

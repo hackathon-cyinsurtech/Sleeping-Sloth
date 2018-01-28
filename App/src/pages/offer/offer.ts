@@ -37,6 +37,7 @@ export class OfferPage {
   public roadHelp: any;
   public thirdParty: any;
   public userId: any;
+  public insuranceCompany: any;
 
 
 
@@ -61,17 +62,18 @@ export class OfferPage {
                    console.log(this.details.id);
 
                    this.coverType = this.details.coverType;
-                   this.driverCover = this.details.driverCover;
-                   this.excess = this.details.excess;
-                   this.id = this.details.id;
-                   this.legalAssistance = this.details.legalAssistance;
-                   this.passengersCover = this.details.passengersCover;
-                   this.personalAccident = this.details.personalAccident;
-                   this.price = this.details.price;
-                   this.quoteRequestId = this.details.quoteRequestId;
-                   this.roadHelp = this.details.roadHelp;
-                   this.thirdParty = this.details.thirdParty;
-                   this.userId = this.details.userId;
+                   this.driverCover = this.details.offer.driverCover;
+                   this.excess = this.details.offer.excess;
+                   this.id = this.details.offer.id;
+                   this.legalAssistance = this.details.offer.legalAssistance;
+                   this.passengersCover = this.details.offer.passengersCover;
+                   this.personalAccident = this.details.offer.personalAccident;
+                   this.price = this.details.offer.price;
+                   this.quoteRequestId = this.details.offer.quoteRequestId;
+                   this.roadHelp = this.details.offer.roadHelp;
+                   this.thirdParty = this.details.offer.thirdParty;
+                   this.userId = this.details.offer.userId;
+				   this.insuranceCompany  = this.details.user.name + " " + this.details.user.surname
 
                });
 
