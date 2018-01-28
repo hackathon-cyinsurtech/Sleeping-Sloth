@@ -5,6 +5,8 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Platform } from 'ionic-angular';
 
+import { BoughtPage } from '../bought/bought';
+
 /**
  * Generated class for the OfferPage page.
  *
@@ -85,6 +87,9 @@ export class OfferPage {
 
   buy(){
     console.log("BUY");
+    this.navCtrl.push(BoughtPage, {
+
+    });
   }
 
 }

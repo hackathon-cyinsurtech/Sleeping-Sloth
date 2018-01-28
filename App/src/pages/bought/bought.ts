@@ -8,6 +8,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
+ import { HomePage } from '../home/home';
+
 @IonicPage()
 @Component({
   selector: 'page-bought',
@@ -15,11 +17,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BoughtPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public referenceNumber: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams){
+    this.referenceNumber = Math.floor(Math.random() * Math.floor(100000));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BoughtPage');
+  }
+
+  ionViewWillLeave(){
+    //console.log("LEaving Bye Bye");
+    this.navCtrl.push(HomePage, {});
   }
 
 }

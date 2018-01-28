@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { CarPage } from '../pages/car/car';
 import { OffersPage } from '../pages/offers/offers';
 import { OfferPage } from '../pages/offer/offer';
+import { BoughtPage } from '../pages/bought/bought';
 
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,7 +25,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     CarPage,
     OffersPage,
-    OfferPage
+    OfferPage,
+    BoughtPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     CarPage,
     OffersPage,
-    OfferPage
+    OfferPage,
+    BoughtPage
   ],
   providers: [
     StatusBar,
