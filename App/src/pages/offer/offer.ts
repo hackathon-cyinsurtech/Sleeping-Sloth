@@ -83,4 +83,8 @@ export class OfferPage {
     console.log('ionViewDidLoad OfferPage');
   }
 
+  buy(){
+    console.log("BUY");
+  }
+
 }
