@@ -7,12 +7,135 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>offer</ion-title>
+    <ion-title style="text-align:right;">Offer Details</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+
+  <div class="title" style="margin:26px 0px 25px 0px; padding:0px;">Coverage Proposal</div>
+
+
+  <ng-container>
+
+    <ion-item style="max-width:400px; margin:0px auto 0px auto;">
+
+
+
+
+        <div style="width:100%; margin:8px 0 8px 0; text-align:center;">
+            Insurance Company
+        </div>
+
+
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Coverage
+          </div>
+          <div class="customColumn alignLeft">
+              {{coverType}}
+          </div>
+        </div>
+
+
+
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Driver Cover
+          </div>
+          <div class="customColumn alignLeft">
+
+              <input type="checkbox"  *ngIf="!driverCover" disabled><br>
+              <input type="checkbox" checked *ngIf="driverCover" disabled><br>
+          </div>
+        </div>
+
+
+
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Legal Assistance
+          </div>
+          <div class="customColumn alignLeft">
+            <input type="checkbox"  *ngIf="!legalAssistance" disabled><br>
+            <input type="checkbox"checked *ngIf="legalAssistance" disabled><br>
+          </div>
+        </div>
+
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Road Help
+          </div>
+          <div class="customColumn alignLeft">
+            <input type="checkbox"  *ngIf="!roadHelp" disabled><br>
+            <input type="checkbox" checked *ngIf="roadHelp" disabled><br>
+          </div>
+        </div>
+
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Passenger Coverage
+          </div>
+          <div class="customColumn alignLeft">
+            <input type="checkbox"  *ngIf="!passengersCover" disabled><br>
+            <input type="checkbox" checked *ngIf="passengersCover" disabled><br>
+          </div>
+        </div>
+
+
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Personal Accident
+          </div>
+          <div class="customColumn alignLeft">
+            <input type="checkbox"  *ngIf="!personalAccident" disabled><br>
+            <input type="checkbox" checked *ngIf="personalAccident" disabled><br>
+          </div>
+        </div>
+
+
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Third Party
+          </div>
+          <div class="customColumn alignLeft">
+            <input type="checkbox"  *ngIf="!thirdParty" disabled><br>
+            <input type="checkbox" checked *ngIf="thirdParty" disabled><br>
+          </div>
+        </div>
+
+
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Excess
+          </div>
+          <div class="customColumn alignLeft">
+              {{excess}}€
+          </div>
+        </div>
+        <div style="width:100%">
+          <div class="customColumn alignRight">
+              Price
+          </div>
+          <div class="customColumn alignLeft">
+              {{price}}€
+          </div>
+        </div>
+
+
+
+
+           <div style="float:right; ">
+              <ion-icon style="font-size:25px;" name="arrow-dropright-circle"></ion-icon>
+           </div>
+           <div style="float:right; line-height:26px; margin-right:16px;">BUY</div>
+    </ion-item>
+
+  </ng-container>
+
+
 
 </ion-content>

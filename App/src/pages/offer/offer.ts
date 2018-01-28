@@ -19,9 +19,26 @@ import { Platform } from 'ionic-angular';
 })
 export class OfferPage {
 
-  public offerDetails: any;
+  public details: any;
   public quoteID: any;
   public apiURL: any;
+
+
+
+  public coverType: any;
+  public driverCover: any;
+  public excess: any;
+  public id: any;
+  public legalAssistance: any;
+  public passengersCover: any;
+  public personalAccident: any;
+  public price: any;
+  public quoteRequestId: any;
+  public roadHelp: any;
+  public thirdParty: any;
+  public userId: any;
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,  public platform: Platform) {
     if (this.platform.is('ios') || this.platform.is('android') ) {
@@ -33,12 +50,28 @@ export class OfferPage {
 
 
         var quoteID = navParams.get("id");
-       this.http.get(this.apiURL+'/offer/findForQuote?quoteRequestId='+quoteID, {})
+       this.http.get(this.apiURL+'/offer/find?offerId='+quoteID, {})
                //.map(res => res.json())
 
                .subscribe(data => {
-                  // console.log(JSON.parse(data['_body']));
-                   this.offerDetails = JSON.parse(data['_body']);
+                 console.log("Hmmmmmmmm");
+                 console.log(data);
+                   console.log(JSON.parse(data['_body']));
+                   this.details = JSON.parse(data['_body']);
+                   console.log(this.details.id);
+
+                   this.coverType = this.details.coverType;
+                   this.driverCover = this.details.driverCover;
+                   this.excess = this.details.excess;
+                   this.id = this.details.id;
+                   this.legalAssistance = this.details.legalAssistance;
+                   this.passengersCover = this.details.passengersCover;
+                   this.personalAccident = this.details.personalAccident;
+                   this.price = this.details.price;
+                   this.quoteRequestId = this.details.quoteRequestId;
+                   this.roadHelp = this.details.roadHelp;
+                   this.thirdParty = this.details.thirdParty;
+                   this.userId = this.details.userId;
 
                });
 
