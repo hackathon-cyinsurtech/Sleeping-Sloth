@@ -59,10 +59,23 @@ ionViewWillEnter() {
 
 
 
+
       }
+
+
       console.log("is nullHome? "+val+ this.showLoginBtn);
         console.log(this.pendingQuotes);
     });
+
+      this.storage.get('userType').then((val) => {
+        this.userType = val;
+        if(this.userType != 'INSURANCE_COMPANY') {
+                this.retreivePendingQuotes(temp.id);
+        } else {
+                this.retreiveNewQuoteRequests();
+                console.log("This is an Insurance company");
+        }
+      });
 }
 
   retreivePendingQuotes(val:any){
@@ -81,8 +94,8 @@ ionViewWillEnter() {
                console.log(data);
           });
   }
-  
-  
+
+
   retreiveNewQuoteRequests(){
      this.http.get(this.apiURL+'/quote/allOpen', {})
             //.map(res => res.json())
@@ -102,6 +115,7 @@ ionViewWillEnter() {
      this.storage.set('userId', "");
      this.showLoginBtn=false;
 	 this.userType = "";
+   this.storage.set('userType', "");
 	 console.log("User type " + this.userType);
      this.pendingQuotes = undefined;
      let toast = this.toastCtrl.create({
@@ -176,16 +190,18 @@ ionViewWillEnter() {
                       });
                       this.showLoginBtn=true;
 					  this.userType = temp.userType;
+
+            this.storage.set('userType', this.userType);
 					  console.log("User type " + temp.userType);
-					  
+
 					  if(this.userType != 'INSURANCE_COMPANY') {
-						this.retreivePendingQuotes(temp.id);
+						        this.retreivePendingQuotes(temp.id);
 					  } else {
-						this.retreiveNewQuoteRequests();						  
-						console.log("This is an Insurance company");
+						        this.retreiveNewQuoteRequests();
+						        console.log("This is an Insurance company");
 					  }
-                      
-					  
+
+
 					  toast.present();
                      }
                  });
